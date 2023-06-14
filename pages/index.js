@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import Link from 'next/link'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 import {useEffect, useState} from 'react'
@@ -16,7 +17,9 @@ export default function Home({posts}) {
     <ul>
         {posts.map( post => (
             <li key={post.id}>
-                <h3>{post.title}</h3>
+              <Link href={`blog/${post.id}`}>
+                  <h3>{post.id} - {post.title}</h3>
+              </Link>
             </li>
         ))}
     </ul>
@@ -25,7 +28,7 @@ export default function Home({posts}) {
 }
 
 export async function getStaticProps() {
-  const posts =  await fetch('https://jsonplaceholder.typicode.com/posts?_limit=5')
+  const posts =  await fetch(`https://jsonplaceholder.typicode.com/posts?_limit=5`)
   .then(response => response.json())
 
   return {
