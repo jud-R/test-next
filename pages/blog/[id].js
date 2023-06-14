@@ -9,14 +9,14 @@ export default function Post ({post}) {
 
   return (
     <main>
-        <Link href="/">Revenir à l'accueil</Link>
+        <Link href="/">Accueil</Link>
         <h1>{post.title}</h1>
         <p>{post.body}</p>
     </main>
   )
 }
 
-export async function getStaticProps({params}) {
+export async function getServerSideProps({params}) {
   const post = await fetch(`https://jsonplaceholder.typicode.com/posts/${params.id}`)
   .then(response => response.json())
 
@@ -28,7 +28,7 @@ export async function getStaticProps({params}) {
 }
 
 
-export async function getStaticPaths() {
+/* export async function getStaticPaths() {
     const posts =  await fetch(`https://jsonplaceholder.typicode.com/posts?_limit=5`)
     .then(response => response.json())
   
@@ -38,4 +38,4 @@ export async function getStaticPaths() {
       })),
       fallback: false,
     }
-  }
+  } */

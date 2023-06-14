@@ -7,13 +7,14 @@ import {useEffect, useState} from 'react'
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Home({posts}) {
+export default function Home({posts, date}) {
 
   return (
     <>
     <Head>
       <title>Test Next - Blog</title>
     </Head>
+    <h1>Date : {date}</h1>
     <ul>
         {posts.map( post => (
             <li key={post.id}>
@@ -33,7 +34,9 @@ export async function getStaticProps() {
 
   return {
     props: {
-      posts
-    }
+      posts,
+      date: (new Date().toString())
+    },
+    revalidate: 5,
   }
 }
